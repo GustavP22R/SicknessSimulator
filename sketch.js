@@ -9,8 +9,7 @@ function setup()
 function draw() 
 {
   background(165,212,112);
-
-
+  
   push();
   strokeWeight(10);
   stroke(168, 68,50);
