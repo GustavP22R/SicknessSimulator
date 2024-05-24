@@ -29,7 +29,7 @@ function draw()
     barrier.display();
 
     //Houses display
-    circleGenerator.displayCircles(); 
+    houseGenerator.displayHouses(); 
 }
 
 //mousePressed function to help the barrier
