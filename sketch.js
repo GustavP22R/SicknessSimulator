@@ -3,6 +3,13 @@ let barrier;
 
 let houseGenerator;
 
+let houseImage;
+
+function preload()
+{
+  houseImage = loadImage('house.png');
+}
+
 function setup() 
 {
   createCanvas(windowWidth, windowHeight);
@@ -10,26 +17,29 @@ function setup()
 
   barrier = new Barrier();
 
-  houseGenerator = new HouseGenerator(3);
-  houseGenerator.generateHouses();
+  //Choose number of houses - More than 20 houses and it crashes
+  houseGenerator = new HouseGenerator(5);
+  houseGenerator.GenerateHouses();
 }
 
 function draw() 
-{
-    background(165,212,112);
+{ 
+    background(109, 210, 247);
 
-    strokeWeight(5);
-    line(200,200,500,200);
+    push();
+    fill(165,212,112)
+    rect(20,20, width - 40, height - 40, 20);
+    pop();
 
     strokeWeight(2);
     circle(350,400,30);
 
     //Barrier update and display
-    barrier.updateBarrier();
-    barrier.display();
+    barrier.UpdateBarrier();
+    barrier.Display();
 
     //Houses display
-    houseGenerator.displayHouses(); 
+    houseGenerator.DisplayHouses(); 
 }
 
 //mousePressed function to help the barrier

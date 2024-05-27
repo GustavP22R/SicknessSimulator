@@ -7,12 +7,12 @@ class HouseGenerator
         this.numHouses = numHouses;
         this.houses = [];
 
-        this.minRadius = 10;
+        this.minRadius = 50;
         this.maxRadius = 50;
     }
 
     //Generate houses position
-    generateHouses()
+    GenerateHouses()
     {
         for (let i = 0; i < this.numHouses; i++) 
           {
@@ -24,18 +24,18 @@ class HouseGenerator
             y = random(100, height - 100);
             radius = random(this.minRadius, this.maxRadius);
             }   
-            while (this.isTooClose(x, y));
+            while (this.IsTooClose(x, y));
 
             this.houses.push(new House(x, y, radius));
           }
     }
 
     //Checks if the houses is to close to eachother, then the generateHouses() know to relocate house
-    isTooClose(x, y) 
+    IsTooClose(x, y) 
     {
       for (let house of this.houses) 
         {
-          let distance = dist(x, y, house.x, house.y);
+          let   distance = dist(x, y, house.x, house.y);
           if (distance < 200) 
           {
               return true;
@@ -45,11 +45,11 @@ class HouseGenerator
     }
 
     //Displays the house on the canvas
-    displayHouses() 
+    DisplayHouses() 
     {
         for (let house of this.houses) 
         {
-          house.display();
+          house.Display();
         }
     }   
 }
@@ -64,9 +64,14 @@ class House
       this.radius = radius;
     }
   
-    display() 
+    Display() 
     {
-      fill(125, 164, 227);
-      ellipse(this.x, this.y, this.radius * 2);
+      //If circle instead of house
+      // fill(125, 164, 227);
+      // ellipse(this.x, this.y, this.radius * 2);
+
+      //Draws house.png on top of circle
+      image(houseImage, this.x - this.radius * 1.5, this.y - this.radius * 1.6, this.radius * 3.2, this.radius * 3.2);
+
     }
   }
