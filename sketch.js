@@ -36,7 +36,7 @@ function draw()
 
     //Barrier update and display
     barrier.UpdateBarrier();
-    barrier.Display();
+    barrier.DisplayBarrier();
 
     //Houses display
     houseGenerator.DisplayHouses(); 

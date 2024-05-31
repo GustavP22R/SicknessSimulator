@@ -74,7 +74,7 @@ class Barrier
 
 
    //Draws barrier
-   Display() 
+   DisplayBarrier() 
    {
       if (pressCount === 1 || pressCount === 2 || pressCount === 3) 
       {
