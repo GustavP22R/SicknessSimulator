@@ -25,7 +25,7 @@ class HouseGenerator
             radius = random(this.minRadius, this.maxRadius);
             }   
             while (this.IsTooClose(x, y));
-
+            
             this.houses.push(new House(x, y, radius));
           }
     }
