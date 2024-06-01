@@ -7,8 +7,9 @@ class HouseGenerator
         this.numHouses = numHouses;
         this.houses = [];
 
-        this.minRadius = 50;
-        this.maxRadius = 50;
+        this.minRadius = (50*width)/1920;
+        this.maxRadius = (50*width)/1920;
+        
     }
 
     //Generate houses position

@@ -5,6 +5,11 @@ let houseGenerator;
 
 let houseImage;
 
+let npc = [];
+let chance = 30;
+
+let sick = 0;
+
 function preload()
 {
   houseImage = loadImage('house.png');
@@ -14,6 +19,16 @@ function setup()
 {
   createCanvas(windowWidth, windowHeight);
   console.log(windowWidth);
+
+  for (let i = 0; i < 15; i++) {
+    npc[i] = new NPC(chance);
+    for (let j = 0; j < npc.length; j++) {
+       if (i != j && npc[i].intersect(npc[j])) {
+     npc[i].check(npc[j]);
+      }
+   
+    }
+  }
 
   barrier = new Barrier();
 
@@ -25,6 +40,8 @@ function setup()
 function draw() 
 { 
     background(109, 210, 247);
+
+
 
     push();
     fill(165,212,112)
@@ -40,7 +57,23 @@ function draw()
 
     //Houses display
     houseGenerator.DisplayHouses(); 
+
+
+  for (let i = 0; i < npc.length; i++) {
+    npc[i].show();
+    
+    for (let j = 0; j < npc.length; j++) {    
+      
+      if (i != j && npc[i].intersect(npc[j])) {
+        npc[i].infect(npc[j]);
+        //    npc[i].collide(npc[j]);
+        npc[i].bounce();
+      }
+    }  
+  }
 }
+
+
 
 //mousePressed function to help the barrier
 function mousePressed() 
@@ -50,6 +83,3 @@ function mousePressed()
     pressCount++;
   }
 }
-
-
-
