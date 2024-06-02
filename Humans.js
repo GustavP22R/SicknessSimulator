@@ -1,21 +1,23 @@
 
 class NPC {
-    constructor(chance) {
+    constructor(chance,amount,number) {
       this.speed = [-2, 2];
+      this.amount=amount;
+      this.number=number;
   
       this.r = (10*width)/800;
-      this.x = random(0 + this.r, width - this.r);
-      this.y = random(0 + this.r, height - this.r);
+      this.x = random(0 + this.r+20, width - this.r-20);
+      this.y = random(0 + this.r+20, height - this.r-20);
   
-      this.directionX = round(random(-1, 1), 1);
-      this.directionY = round(random(-1, 1), 1);
+      this.directionX = round(random(-2, 2), 1);
+      this.directionY = round(random(-2, 2), 1);
   
       this.infectChance = chance;
       this.infection = random(0, 100);
   
       this.infected = false;
       
-      if (this.infection < this.infectChance) {
+      if (this.number < this.amount) {
         this.infected = true;
         sick += 1;
       } else {
@@ -29,11 +31,11 @@ class NPC {
       this.x = this.x + this.directionX;
       this.y = this.y + this.directionY;
   
-      if (this.x >= width - this.r || this.x < this.r) {
+      if (this.x >= width - this.r-20 || this.x < this.r+20) {
         this.directionX = this.directionX * -1;
       }
   
-      if (this.y >= height - this.r || this.y < this.r) {
+      if (this.y >= height - this.r-20 || this.y < this.r+20) {
         this.directionY = this.directionY * -1;
       }
     }
@@ -64,13 +66,13 @@ class NPC {
       }
     }
     
-    house(other)
+    enterHouse()
   {
-    this.d = dist(this.x, this.y, other.x, other.y);
-    if(this.d>this.r)
-    {
-return true;
-    }
+this.directionX=0;
+this.directionY=0;
+
+// this.x=other.x;
+// this.y=other.y;
   }
   
     infect(other) {
@@ -105,10 +107,20 @@ return true;
       pop();
     }
     
-    intersect(other) {
+    intersectHuman(other) {
       this.d = dist(this.x, this.y, other.x, other.y);
   
       if (this.d < this.r * 2) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    intersectHouse(other) {
+      this.d = dist(this.x, this.y, other.x, other.y);
+  
+      if (this.d < this.r*2) {
         return true;
       } else {
         return false;

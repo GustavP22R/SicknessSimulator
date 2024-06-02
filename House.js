@@ -45,6 +45,17 @@ class HouseGenerator
       return false;
     }
 
+    intersect(other)
+    {
+      this.d=dist(this.x,this.y,other.x,other.y);
+
+      if(this.d<200)
+      {
+return true;
+      }
+      else {return false;}
+    }
+
     //Displays the house on the canvas
     DisplayHouses() 
     {
@@ -74,5 +85,7 @@ class House
       //Draws house.png on top of circle
       image(houseImage, this.x - this.radius * 1.5, this.y - this.radius * 1.6, this.radius * 3.2, this.radius * 3.2);
 
+      text(round(this.x)+" "+round(this.y),this.x,this.y);
     }
+
   }
