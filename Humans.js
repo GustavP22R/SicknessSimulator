@@ -1,8 +1,6 @@
 
-class NPC 
-{
-    constructor(chance,amount,number) 
-    {
+class NPC {
+    constructor(chance,amount,number) {
       this.speed = [-2, 2];
       this.amount=amount;
       this.number=number;
@@ -70,19 +68,11 @@ class NPC
     
     enterHouse(other)
   {
-
     this.x=other.x;
     this.y=other.y;
 
     this.directionX=0;
     this.directionY=0;
-
-    this.directionX=0;
-    this.directionY=0;
-
-    // this.x=other.x;
-    // this.y=other.y;
-
   }
 
   exitHouse()
@@ -115,30 +105,8 @@ class NPC
       }
     }
   
-
-    //Checks collision between Barrier and Humans
-    checkBarrierCollision(barrier) 
-    {
-        if (barrier.IsColliding(this.x, this.y, this.r)) 
-        {
-          //Uses normalVector to change the humans direction
-          let normal = barrier.getNormal(this.x, this.y);
-          this.directionX = this.directionX - 2 * (this.directionX * normal.x) * normal.x;
-          this.directionY = this.directionY - 2 * (this.directionY * normal.y) * normal.y;
-
-          // Move the NPC slightly away from the barrier to avoid getting stuck
-          this.x += normal.x * this.r;
-          this.y += normal.y * this.r;
-        }
-    }
-
-
-    show(barrier) 
-    {
+    show() {
       this.move();
-
-      // Check collision with barrier
-      this.checkBarrierCollision(barrier);
   
       push();
       if (this.infected == true) {
@@ -172,4 +140,4 @@ class NPC
         return false;
       }
     }
-}
+  }
