@@ -73,13 +73,13 @@ class NPC {
 
     this.directionX=0;
     this.directionY=0;
+    this.infection=0;
   }
 
   exitHouse()
   {
     this.x = this.x;
     this.y = this.y+50;
-
      
     this.directionX = round(random(-2, 2));
     this.directionY = round(random(-2, 2));
@@ -134,7 +134,7 @@ class NPC {
     intersectHouse(other) {
       this.d = dist(this.x, this.y, other.x, other.y);
   
-      if (this.d < this.r+other.r) {
+      if (this.d < this.r*2) {
         return true;
       } else {
         return false;

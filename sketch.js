@@ -95,9 +95,7 @@ house[k].show();
 if(npc[i].intersectHouse(house[k]))
 {
 npc[i].enterHouse(house[k]);
-// npc[i].insideHouse();
 
-// 
 }
 
   }
