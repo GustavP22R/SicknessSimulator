@@ -24,7 +24,7 @@ function setup()
 
   for(let i=0;i<5;i++)
   { 
-    house[i]=new House2();
+    house[i]=new House();
 
     for(let j = 0; j < house.length; j++)
     {

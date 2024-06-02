@@ -45,18 +45,6 @@ class Human {
       this.directionY = this.directionY * -1;
     }
   
-    collide(other) {
-      if (this.directionX > 0 && other.directionX > 0) {
-        if (this.directionY > 0) this.directionX = this.directionX * -1;
-        other.directionX = other.directionX * -1;
-      }
-  
-      if (this.directionY > 0 && other.directionY > 0) {
-        this.directionY = this.directionY * -1;
-        other.directionY = other.directionY * -1;
-      }
-    }
-  
     check(other) {
       this.d = dist(this.x, this.y, other.x, other.y);
   
