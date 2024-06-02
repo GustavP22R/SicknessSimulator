@@ -6,7 +6,7 @@ let houseGenerator;
 let houseImage;
 let house=[];
 
-let npc = [];
+let human = [];
 let chance = 30;
 let startSick=5;
 
@@ -37,13 +37,13 @@ function setup()
 
   for (let k = 0; k < 15; k++) 
   {
-    npc[k] = new NPC(chance,startSick,k);
+    human[k] = new Human(chance,startSick,k);
 
-    for (let l = 0; l < npc.length; l++) 
+    for (let l = 0; l < human.length; l++) 
     {
-       if (k != l && npc[k].intersectHuman(npc[l])) 
+       if (k != l && human[k].intersectHuman(human[l])) 
        {
-          npc[k].check(npc[l]);
+          human[k].check(human[l]);
         }
      }  
 
@@ -78,24 +78,24 @@ function draw()
     barrier.DisplayBarrier();
 
     //draws people
-  for (let i = 0; i < npc.length; i++) {
-    npc[i].show();
-    npc[i].checkBarrierCollision(barrier);
+  for (let i = 0; i < human.length; i++) {
+    human[i].show();
+    human[i].checkBarrierCollision(barrier);
     
-    for (let j = 0; j < npc.length; j++) {    
+    for (let j = 0; j < human.length; j++) {    
       
-      if (i != j && npc[i].intersectHuman(npc[j])) {
-        npc[i].infect(npc[j]);
-        //    npc[i].collide(npc[j]);
-        npc[i].bounce();
+      if (i != j && human[i].intersectHuman(human[j])) {
+        human[i].infect(human[j]);
+        //    human[i].collide(human[j]);
+        human[i].bounce();
       }      
         for(let k=0;k<house.length;k++)
   {
 house[k].show();
 
-if(npc[i].intersectHouse(house[k]))
+if(human[i].intersectHouse(house[k]))
 {
-npc[i].enterHouse(house[k]);
+human[i].enterHouse(house[k]);
 
 }
 
@@ -112,7 +112,7 @@ npc[i].enterHouse(house[k]);
   textSize(20);
   strokeWeight(1);
   stroke(0);
-  text("Amount of people: " + npc.length,45,60);
+  text("Amount of people: " + human.length,45,60);
   text("Amount of infected: " + sick,45,110);
       pop();
 
