@@ -122,6 +122,7 @@ class Barrier
    //Calculates the distance between human and barrier
    PointLineDistance(px, py, x1, y1, x2, y2) 
     {
+      //Variables which are temporarily to calculate distance
       let A = px - x1;
       let B = py - y1;
       let C = x2 - x1;

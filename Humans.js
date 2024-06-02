@@ -1,68 +1,90 @@
 
-class Human {
-    constructor(chance,amount,number) {
+class Human 
+{
+    constructor(chance,amount,number) 
+    {
+      //Human speed, amount of humans and number of humans infected
       this.speed = [-2, 2];
-      this.amount=amount;
-      this.number=number;
+      this.amount = amount;
+      this.number = number;
   
-      this.r = (10*width)/800;
-      this.x = random(0 + this.r+20, width - this.r-20);
-      this.y = random(0 + this.r+20, height - this.r-20);
+      //Random spawn place of humans
+      this.r = (10 * width) / 800;
+      this.x = random(0 + this.r + 20, width - this.r - 20);
+      this.y = random(0 + this.r + 20, height - this.r - 20);
   
+      //Random direction given to human
       this.directionX = round(random(-2, 2));
       this.directionY = round(random(-2, 2));
   
+      //Chance of infection
       this.infectChance = chance;
       this.infection = random(0, 100);
   
       this.infected = false;
       
-      if (this.number < this.amount) {
+      //Based on randomness humans are infected
+      if (this.number < this.amount) 
+      {
         this.infected = true;
         sick += 1;
-      } else {
+      } 
+      else 
+      {
         this.infected = false;
       }
-  
-      this.groomed = false;
     }
   
-    move() {
+    //Function that moves humans
+    move() 
+    {
+      //Direction of human
       this.x = this.x + this.directionX;
       this.y = this.y + this.directionY;
   
-      if (this.x >= width - this.r-20 || this.x < this.r+20) {
+      //Changes direction of human when hitting corner of map
+      if (this.x >= width - this.r-20 || this.x < this.r+20) 
+      {
         this.directionX = this.directionX * -1;
       }
-  
-      if (this.y >= height - this.r-20 || this.y < this.r+20) {
+      if (this.y >= height - this.r-20 || this.y < this.r+20) 
+      {
         this.directionY = this.directionY * -1;
       }
     }
   
-    bounce() {
+    //Changes direction of humans when two hit eachother
+    bounce() 
+    {
       this.directionX = this.directionX * -1;
       this.directionY = this.directionY * -1;
     }
   
-    check(other) {
+    //Checks if humans spawn on top of eachother, if they do give the new spawn location
+    check(other) 
+    {
+      //distance between humans
       this.d = dist(this.x, this.y, other.x, other.y);
   
-      if (this.d < this.r * 2) {
+      //New spawn location
+      if (this.d < this.r * 2) 
+      {
         this.x = random(0 + this.r, width - this.r);
         this.y = random(0 + this.r, height - this.r);
       }
     }
     
+    //Makes it so humans enter the house
     enterHouse(other)
-  {
-    this.x=other.x;
-    this.y=other.y;
+    {
+      this.x = other.x;
+      this.y = other.y;
 
-    this.directionX=0;
-    this.directionY=0;
-  }
+      this.directionX = 0;
+      this.directionY = 0;
+    }
 
+  //Spawns humans after set times out of house
   exitHouse()
   {
     this.x = this.x;
@@ -73,18 +95,25 @@ class Human {
     this.directionY = round(random(-2, 2));
   }
 
-
-  
-    infect(other) {
-      if (other.infected == true && this.infected == false) {
+  //Infects other person if one who is infected touches one who isn't
+  infect(other) 
+  {
+      //Checks if two humans have different status effect
+      if (other.infected == true && this.infected == false) 
+      {
+        //Chooses chance of getting infected
         this.infection = random(0, 100);
-  
-        if (this.infection < this.infectChance) {
+        
+        //If number of infection higher than infectChance then infect human
+        if (this.infection < this.infectChance) 
+        {
           if (!this.infected)
             sick += 1;
           
           this.infected = true;
-        } else {
+        } 
+        else 
+        {
           if (this.infected)
             sick -= 1;
           
@@ -110,15 +139,18 @@ class Human {
         }
     }
 
-
+    //Shows humans on canvas and changes color if infected
     show(barrier) 
     {
       this.move();
   
       push();
-      if (this.infected == true) {
+      if (this.infected == true) 
+      {
         fill(92, 8, 19);
-      } else {
+      } 
+      else 
+      {
         fill(194, 179, 159);
       }
   
@@ -128,23 +160,33 @@ class Human {
       text(this.time,this.x,this.y);
     }
     
-    intersectHuman(other) {
+    //Function returns true if two humans touch
+    intersectHuman(other) 
+    {
       this.d = dist(this.x, this.y, other.x, other.y);
   
-      if (this.d < this.r * 2) {
+      if (this.d < this.r * 2) 
+      {
         return true;
-      } else {
+      } 
+      else 
+      {
         return false;
       }
     }
 
-    intersectHouse(other) {
+    //Function returns true if house and human touch
+    intersectHouse(other) 
+    {
       this.d = dist(this.x, this.y, other.x, other.y);
   
-      if (this.d < this.r+other.r) {
+      if (this.d < this.r + other.r) 
+      {
         return true;
-      } else {
+      } 
+      else 
+      {
         return false;
       }
     }
-  }
+}
