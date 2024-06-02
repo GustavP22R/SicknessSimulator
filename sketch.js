@@ -92,10 +92,14 @@ function draw()
   {
 house[k].show();
 
-if(npc[i].intersectHouse(house[k])==true)
+if(npc[i].intersectHouse(house[k]))
 {
-  npc[i].enterHouse();
+npc[i].enterHouse(house[k]);
+// npc[i].insideHouse();
+
+// 
 }
+
   }
     } 
 

@@ -9,8 +9,8 @@ class NPC {
       this.x = random(0 + this.r+20, width - this.r-20);
       this.y = random(0 + this.r+20, height - this.r-20);
   
-      this.directionX = round(random(-2, 2), 1);
-      this.directionY = round(random(-2, 2), 1);
+      this.directionX = round(random(-2, 2));
+      this.directionY = round(random(-2, 2));
   
       this.infectChance = chance;
       this.infection = random(0, 100);
@@ -66,14 +66,26 @@ class NPC {
       }
     }
     
-    enterHouse()
+    enterHouse(other)
   {
-this.directionX=0;
-this.directionY=0;
+    this.x=other.x;
+    this.y=other.y;
 
-// this.x=other.x;
-// this.y=other.y;
+    this.directionX=0;
+    this.directionY=0;
   }
+
+  exitHouse()
+  {
+    this.x = this.x;
+    this.y = this.y+50;
+
+     
+    this.directionX = round(random(-2, 2));
+    this.directionY = round(random(-2, 2));
+  }
+
+
   
     infect(other) {
       if (other.infected == true && this.infected == false) {
@@ -105,6 +117,8 @@ this.directionY=0;
   
       circle(this.x, this.y, this.r * 2);
       pop();
+
+      text(this.time,this.x,this.y);
     }
     
     intersectHuman(other) {
@@ -120,7 +134,7 @@ this.directionY=0;
     intersectHouse(other) {
       this.d = dist(this.x, this.y, other.x, other.y);
   
-      if (this.d < this.r*2) {
+      if (this.d < this.r+other.r) {
         return true;
       } else {
         return false;
