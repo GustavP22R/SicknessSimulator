@@ -73,13 +73,13 @@ class NPC {
 
     this.directionX=0;
     this.directionY=0;
-    this.infection=0;
   }
 
   exitHouse()
   {
     this.x = this.x;
     this.y = this.y+50;
+
      
     this.directionX = round(random(-2, 2));
     this.directionY = round(random(-2, 2));
@@ -105,7 +105,26 @@ class NPC {
       }
     }
   
-    show() {
+
+    //Checks collision between Barrier and Humans
+    checkBarrierCollision(barrier) 
+    {
+        if (barrier.IsColliding(this.x, this.y, this.r)) 
+        {
+          //Uses normalVector to change the humans direction
+          let normal = barrier.GetNormal(this.x, this.y);
+          this.directionX = this.directionX - 2 * (this.directionX * normal.x) * normal.x;
+          this.directionY = this.directionY - 2 * (this.directionY * normal.y) * normal.y;
+
+          // Move the NPC slightly away from the barrier to avoid getting stuck
+          this.x += normal.x * this.r;
+          this.y += normal.y * this.r;
+        }
+    }
+
+
+    show(barrier) 
+    {
       this.move();
   
       push();
@@ -134,7 +153,7 @@ class NPC {
     intersectHouse(other) {
       this.d = dist(this.x, this.y, other.x, other.y);
   
-      if (this.d < this.r*2) {
+      if (this.d < this.r+other.r) {
         return true;
       } else {
         return false;

@@ -114,13 +114,13 @@ class Barrier
    //Checks if barrier is colliding with human
    IsColliding(x,y,r) 
     {
-      let dist = this.pointLineDistance(x, y, this.xStart, this.yStart, this.xEnd, this.yEnd);
+      let dist = this.PointLineDistance(x, y, this.xStart, this.yStart, this.xEnd, this.yEnd);
       return dist < r;
     }
 
 
    //Calculates the distance between human and barrier
-   pointLineDistance(px, py, x1, y1, x2, y2) 
+   PointLineDistance(px, py, x1, y1, x2, y2) 
     {
       let A = px - x1;
       let B = py - y1;
@@ -155,7 +155,7 @@ class Barrier
     }
 
     //Function that gets normal vector
-    getNormal(px,py)
+    GetNormal(px,py)
     {
       // Vector from start of the barrier to the end
       let lineVec = createVector(this.xEnd - this.xStart, this.yEnd - this.yStart);

@@ -80,6 +80,7 @@ function draw()
     //draws people
   for (let i = 0; i < npc.length; i++) {
     npc[i].show();
+    npc[i].checkBarrierCollision(barrier);
     
     for (let j = 0; j < npc.length; j++) {    
       
