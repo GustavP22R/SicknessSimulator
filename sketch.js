@@ -4,11 +4,11 @@ let barrier;
 let houseGenerator;
 
 let houseImage;
-let house=[];
+let house = [];
 
 let npc = [];
 let chance = 30;
-let startSick=5;
+let startSick = 5;
 
 let sick = 0;
 
@@ -22,13 +22,13 @@ function setup()
   createCanvas(windowWidth, windowHeight);
   console.log(windowWidth);
 
-  for(let i=0;i<5;i++)
+  for(let i = 0; i < 5; i++)
   { 
-    house[i]=new House2();
+    house[i] = new House2();
 
     for(let j = 0; j < house.length; j++)
     {
-     if(i!=j && house[i].check(house[j])==true)
+     if(i!=j && house[i].check(house[j]) == true)
       {
        house[i].relocate();
       }
@@ -55,9 +55,7 @@ function setup()
   // houseGenerator = new HouseGenerator(5);
   // houseGenerator.GenerateHouses();
 
-
-
-
+  console.log("Setup completed");
 }
 
 function draw() 
@@ -77,44 +75,46 @@ function draw()
     barrier.UpdateBarrier();
     barrier.DisplayBarrier();
 
+    console.log(pressCount);
+
     //draws people
-  for (let i = 0; i < npc.length; i++) {
-    npc[i].show();
-    
-    for (let j = 0; j < npc.length; j++) {    
+    for (let i = 0; i < npc.length; i++) 
+    {
+      npc[i].show(barrier);
       
-      if (i != j && npc[i].intersectHuman(npc[j])) {
-        npc[i].infect(npc[j]);
-        //    npc[i].collide(npc[j]);
-        npc[i].bounce();
-      }      
-        for(let k=0;k<house.length;k++)
-  {
-house[k].show();
+      for (let j = 0; j < npc.length; j++) 
+      {    
+        
+        if (i != j && npc[i].intersectHuman(npc[j])) 
+        {
+          npc[i].infect(npc[j]);
+          //    npc[i].collide(npc[j]);
+          npc[i].bounce();
+        }  
 
-if(npc[i].intersectHouse(house[k])==true)
-{
-  npc[i].enterHouse();
+        
+        for(let k = 0; k< house.length; k++)
+        {
+              house[k].show();
+
+              if(npc[i].intersectHouse(house[k]) == true)
+              {
+                npc[i].enterHouse();
+              }
+        }
+      } 
+
+    }
+
+    push();
+    textSize(20);
+    strokeWeight(1);
+    stroke(0);
+    text("Amount of people: " + npc.length, 45, 60);
+    text("Amount of infected: " + sick, 45, 110);
+    pop();
+
 }
-  }
-    } 
-
-  }
-
-
-    //Houses display
-  // houseGenerator.DisplayHouses(); 
-
-  push();
-  textSize(20);
-  strokeWeight(1);
-  stroke(0);
-  text("Amount of people: " + npc.length,45,60);
-  text("Amount of infected: " + sick,45,110);
-      pop();
-
-}
-
 
 
 //mousePressed function to help the barrier
