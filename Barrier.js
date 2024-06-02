@@ -63,7 +63,7 @@ class Barrier
         }
 
           // Start the timer to clear the barrier after 2 seconds
-          if (this.timer) 
+          if (this.timer === true) 
           {
             clearTimeout(this.timer);
           }
@@ -110,4 +110,68 @@ class Barrier
       this.yEnd = 0;
       this.timer = null;
    }
+
+   //Checks if barrier is colliding with human
+   IsColliding(x,y,r) 
+    {
+      let dist = this.pointLineDistance(x, y, this.xStart, this.yStart, this.xEnd, this.yEnd);
+      return dist < r;
+    }
+
+
+   //Calculates the distance between human and barrier
+   pointLineDistance(px, py, x1, y1, x2, y2) 
+    {
+      let A = px - x1;
+      let B = py - y1;
+      let C = x2 - x1;
+      let D = y2 - y1;
+
+      let dot = A * C + B * D;
+      let lengthSquare = C * C + D * D;
+      let param = dot / lengthSquare;
+
+      let xx, yy;
+
+      if (param < 0 || (x1 === x2 && y1 === y2)) 
+      {
+        xx = x1;
+        yy = y1;
+      } 
+      else if (param > 1) 
+      {
+        xx = x2;
+        yy = y2;
+      } 
+      else 
+      {
+        xx = x1 + param * C;
+        yy = y1 + param * D;
+      }
+
+      let dx = px - xx;
+      let dy = py - yy;
+      return sqrt(dx * dx + dy * dy);
+    }
+
+    //Function that gets normal vector
+    getNormal(px,py)
+    {
+      // Vector from start of the barrier to the end
+      let lineVec = createVector(this.xEnd - this.xStart, this.yEnd - this.yStart);
+
+       // Vector from start of the barrier to the point
+      let pointVec = createVector(px - this.xStart, py - this.yStart);
+
+      // Project pointVec onto lineVec
+      let lineLength = lineVec.mag();
+      let projLength = (pointVec.dot(lineVec)) / lineLength;
+      let projVec = lineVec.copy().normalize().mult(projLength);
+
+      // Normal vector is the difference between the point vector and its projection on the line
+      let normalVec = p5.Vector.sub(pointVec, projVec);
+      return normalVec.normalize();
+    }
 }
+
+
