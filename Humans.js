@@ -1,5 +1,5 @@
 
-class NPC {
+class Human {
     constructor(chance,amount,number) {
       this.speed = [-2, 2];
       this.amount=amount;
